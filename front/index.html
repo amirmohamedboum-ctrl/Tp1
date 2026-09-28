@@ -1,16 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./index.css">
+    <title>Mon CV Interactif</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fichier CSS personnalisé -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>bonjour je suis otman</h1>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
 
+    <!-- Barre d'outils (Non visible à l'impression) -->
+    <header class="print:hidden sticky top-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm py-3 px-6 flex justify-between items-center">
+        <h1 class="font-bold text-lg text-indigo-600 dark:text-indigo-400">CV de Jean Dupont</h1>
+        <div class="flex items-center gap-3">
+            <!-- Bouton Mode Sombre/Clair -->
+            <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition" aria-label="Changer le thème">
+                <i id="theme-icon" class="fa-solid fa-moon text-slate-700 dark:text-yellow-400"></i>
+            </button>
+            <!-- Bouton Impression PDF -->
+            <button id="print-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> Télécharger / Imprimer
+            </button>
+        </div>
+    </header>
 
+    <!-- Conteneur principal du CV -->
+    <main class="max-w-4xl mx-auto my-8 p-6 md:p-10 bg-white dark:bg-slate-800 shadow-xl rounded-2xl border border-slate-200/60 dark:border-slate-700">
+        
+        <!-- En-tête du CV -->
+        <section class="flex flex-col md:flex-row items-center gap-6 border-b border-slate-200 dark:border-slate-700 pb-8">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" alt="Photo de profil" class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-indigo-500/20">
+            <div class="text-center md:text-left flex-1">
+                <h2 class="text-3xl font-bold tracking-tight">Jean Dupont</h2>
+                <p class="text-lg text-indigo-600 dark:text-indigo-400 font-medium mt-1">Développeur Full Stack & Designer UI/UX</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Passionné par la création d'applications web performantes, ergonomiques et esthétiques.</p>
+                
+                <!-- Coordonnées -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-sm text-slate-600 dark:text-slate-300">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-indigo-500"></i> Paris, France</span>
+                    <button id="copy-email" class="flex items-center gap-1.5 hover:text-indigo-600 transition cursor-pointer" title="Copier l'e-mail">
+                        <i class="fa-solid fa-envelope text-indigo-500"></i> <span id="email-text">jean.dupont@example.com</span>
+                    </button>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-phone text-indigo-500"></i> +33 6 12 34 56 78</span>
+                </div>
+            </div>
+        </section>
 
-    <script src="./index.js"></script>
+        <!-- Expériences Professionnelles -->
+        <section class="mt-8">
+            <h3 class="text-xl font-bold border-l-4 border-indigo-600 pl-3 mb-6">Expérience Professionnelle</h3>
+            <div class="space-y-6">
+                <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-700">
+                    <div class="absolute -left-[7px] top-1.5 w-3 h-3 bg-indigo-600 rounded-full"></div>
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-1">
+                        <h4 class="font-semibold text-lg">Développeur Front-End Senior</h4>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300 rounded-full w-fit">2021 - Présent</span>
+                    </div>
+                    <p class="text-sm text-indigo-600 dark:text-indigo-400 font-medium">Agence Webify — Paris</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Développement d'interfaces web réactives avec React, Tailwind CSS et intégration d'API REST. Encadrement technique de juniors.</p>
+                </div>
+
+                <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-700">
+                    <div class="absolute -left-[7px] top-1.5 w-3 h-3 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-1">
+                        <h4 class="font-semibold text-lg">Intégrateur Web & UI Designer</h4>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300 rounded-full w-fit">2019 - 2021</span>
+                    </div>
+                    <p class="text-sm text-indigo-600 dark:text-indigo-400 font-medium">Studio Créatif — Lyon</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Conception de maquettes graphiques (Figma) et intégration HTML/CSS/JavaScript responsive pour divers clients.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formation -->
+        <section class="mt-8">
+            <h3 class="text-xl font-bold border-l-4 border-indigo-600 pl-3 mb-6">Formation</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-semibold">Master Expert en Développement Web</h4>
+                    <p class="text-sm text-indigo-600 dark:text-indigo-400 font-medium">Université de Technologie — 2017-2019</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Spécialisation architecture logicielle et technologies web modernes.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-semibold">Licence Informatique</h4>
+                    <p class="text-sm text-indigo-600 dark:text-indigo-400 font-medium">IUT de Lyon — 2014-2017</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bases solides en algorithmique, programmation orientée objet et bases de données.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences avec Filtre Dynamique -->
+        <section class="mt-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <h3 class="text-xl font-bold border-l-4 border-indigo-600 pl-3">Compétences</h3>
+                <!-- Filtres -->
+                <div id="skill-filters" class="flex flex-wrap gap-2 text-xs font-medium">
+                    <button data-filter="all" class="filter-btn active px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition">Tous</button>
+                    <button data-filter="dev" class="filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Dev</button>
+                    <button data-filter="design" class="filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Design</button>
+                    <button data-filter="soft" class="filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">Soft Skills</button>
+                </div>
+            </div>
+
+            <!-- Liste des compétences filtrables -->
+            <div id="skills-container" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="dev">
+                    <i class="fa-brands fa-html5 text-orange-500 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">HTML5 / CSS3</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Avancé</span>
+                    </div>
+                </div>
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="dev">
+                    <i class="fa-brands fa-js text-yellow-400 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">JavaScript (ES6+)</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Avancé</span>
+                    </div>
+                </div>
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="dev">
+                    <i class="fa-brands fa-react text-cyan-400 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">React.js</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Intermédiaire</span>
+                    </div>
+                </div>
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="design">
+                    <i class="fa-brands fa-figma text-pink-500 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">Figma</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Avancé</span>
+                    </div>
+                </div>
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="dev">
+                    <i class="fa-solid fa-wind text-sky-400 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">Tailwind CSS</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Avancé</span>
+                    </div>
+                </div>
+                <div class="skill-card p-3 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center gap-3" data-category="soft">
+                    <i class="fa-solid fa-users text-emerald-500 text-xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold">Travail d'équipe</h5>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Expert</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Toast (Popup de copie d'e-mail) -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2.5 rounded-lg shadow-xl text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        E-mail copié dans le presse-papier !
+    </div>
+
+    <!-- Fichier JavaScript personnalisé -->
+    <script src="script.js"></script>
 </body>
 </html>

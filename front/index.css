@@ -1,0 +1,25 @@
+/* Styles personnalisés complémentaires */
+
+/* Règles spécifiques pour l'impression (Masque la barre de navigation et nettoie l'arrière-plan) */
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    main {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Petites transitions fluides pour les cartes de compétences */
+.skill-card {
+    transition: all 0.25s ease-in-out;
+}
+.skill-card:hover {
+    transform: translateY(-2px);
+    border-color: #6366f1;
+}
